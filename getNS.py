@@ -29,7 +29,7 @@ resolver = pydig.Resolver(
 with open('data/current-federal.csv', 'r') as file:
     data = csv.DictReader(file)
     for row in data:
-        name = row['Domain Name']
+        name = row['Domain name']
         print(name)
         ns = resolver.query(name, 'NS')
         print(ns)
