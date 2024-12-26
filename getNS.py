@@ -21,15 +21,15 @@ csvData, headers = urllib.request.urlretrieve(csvUrl, filename="data/current-fed
 urllib.request.urlcleanup()
 
 resolver = pydig.Resolver(
-    additional_args=[
-        '+time=10',
-    ]
+  additional_args=[
+      '+time=10',
+  ]
 )
 
 with open('data/current-federal.csv', 'r') as file:
-    data = csv.DictReader(file)
-    for row in data:
-        name = row['Domain name']
-        print(name)
-        ns = resolver.query(name, 'NS')
-        print(ns)
+  data = csv.DictReader(file)
+  for row in data:
+    name = row['Domain name']
+    print(name)
+    ns = resolver.query(name, 'NS')
+    print(ns)
