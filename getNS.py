@@ -3,6 +3,9 @@ import csv
 import json
 import urllib.request
 import pydig
+import sys
+
+domain_list = sys.argv[1:]
 
 csvUrl = 'https://raw.githubusercontent.com/cisagov/dotgov-data/main/current-federal.csv'
 commitsUrl = 'https://api.github.com/repos/cisagov/dotgov-data/commits?path=current-federal.csv&page=1&per_page=1'
@@ -30,6 +33,7 @@ with open('data/current-federal.csv', 'r') as file:
   data = csv.DictReader(file)
   for row in data:
     name = row['Domain name']
-    print(name)
-    ns = resolver.query(name, 'NS')
-    print(ns)
+    if any(domain in name for domain in domain_list) or not domain_list:
+        print(name)
+        ns = resolver.query(name, 'NS')
+        print(ns)
